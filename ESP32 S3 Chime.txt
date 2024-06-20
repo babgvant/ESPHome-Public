@@ -1,0 +1,31 @@
+web_server:
+  port: 80
+  #version: 1
+  ota: true
+
+i2s_audio:
+  i2s_lrclk_pin: GPIO6
+  i2s_bclk_pin: GPIO5
+
+media_player:
+  - platform: i2s_audio
+    name: Speaker
+    dac_type: external
+    i2s_dout_pin: GPIO4
+    mode: mono
+    
+sensor:
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "WiFi Signal dB"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: "diagnostic"
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+    entity_category: "diagnostic"
+    device_class: ""
