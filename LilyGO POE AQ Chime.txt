@@ -1,37 +1,4 @@
-esphome:
-  name: poe-chime-1
-  friendly_name: POE Chime 1  
-  on_boot:
-    priority: 800
-    then: 
-      - delay: 1s
-      - fan.turn_on: sensor_fan
-
-esp32:
-  board: esp32dev
-  framework:
-    type: arduino
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "En4MXGuBQm6xMu3Nui66gSYQUjJ7jgTqz8wK5+ShjwA="
-
-ota:
-  password: "0797ec6a58a24548490ee9621c69bf4d"
-
-#wifi:
-#  ssid: !secret wifi_ssid
-#  password: !secret wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-#  ap:
-#    ssid: "Poe-Chime-1 Fallback Hotspot"
-#    password: "o8P7LSVqmyRj"
-
+#case: https://makerworld.com/en/models/503837
 
 ethernet:
   type: LAN8720
@@ -148,7 +115,7 @@ number:
     id: "temp_offset"
     mode: slider
     restore_value: true
-    step: 1
+    step: 0.5
     min_value: -5
     max_value: 10
     optimistic: true
