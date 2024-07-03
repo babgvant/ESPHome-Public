@@ -1,3 +1,6 @@
+
+#case: https://makerworld.com/en/models/504001#profileId-419547
+
 dashboard_import:
   package_import_url: github://esphome/firmware/esphome-web/esp32s3.yaml@v2
   import_full_config: true
@@ -13,7 +16,7 @@ web_server:
 external_components:
   - source: github://neffs/esphome@bsec2_bme68x
     components:
-      - bme68x_bsec
+      - bme68x_bsec_i2c
 
 i2c:
 - id: bus_b
@@ -22,7 +25,8 @@ i2c:
   scan: true
   frequency: 100000
 
-bme68x_bsec:
+bme68x_bsec_i2c:
+  model: bme680
   i2c_id: bus_b
   address: 0x77
   id: iq_sensor
@@ -66,7 +70,7 @@ sensor:
     entity_category: "diagnostic"
     device_class: ""
   
-  - platform: bme68x_bsec
+  - platform: bme68x_bsec_i2c
     temperature:
       name: "Temperature"
       id: "temperature"
@@ -103,7 +107,7 @@ sensor:
     update_interval: 15s
 
 text_sensor:
-  - platform: bme68x_bsec
+  - platform: bme68x_bsec_i2c
     iaq_accuracy:
       name: "IAQ Accuracy"
 
